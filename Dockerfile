@@ -7,8 +7,12 @@ WORKDIR /usr/src/app
 # add requirements to leverage Docker cache
 ADD ./requirements.txt /usr/src/app/requirements.txt
 
+# upgrade setuptools first
+RUN apk update && apk add postgresql-dev gcc python3-dev musl-dev
+
+
 # install requirements
-RUN pip install -r requirements.txt
+RUN pip3 install -r requirements.txt
 
 # add app
 ADD . /usr/src/app

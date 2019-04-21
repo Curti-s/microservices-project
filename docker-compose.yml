@@ -1,6 +1,17 @@
 version: '2.1'
 
 services:
+  users-db:
+    container_name: users-db
+    build: ./flask_users/db
+    ports:
+      - 5435:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password1234
+    healthcheck:
+      test: exit 0
+
   users-service:
     container_name: users-service
     build: .
@@ -10,3 +21,10 @@ services:
       - 5001:5000 
     environment:
       - APP_SETTINGS=flask_users.config.DevelopmentConfig
+      - DATABASE_URL=postgres://postgres:password1234@users-db:5432/users_dev
+      - DATEBASE_TEST_URL=postgres://postgres:password1234@users-db:5432/users_test
+    depends_on:
+      users-db:
+        condition: service_healthy
+    links:
+    - users-db
