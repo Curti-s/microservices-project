@@ -2,8 +2,9 @@ import unittest
 
 from flask_script import Manager
 
-from flask_users import app, db
+from flask_users import create_app, db
 
+app = create_app()
 manager = Manager(app)
 
 @manager.command
