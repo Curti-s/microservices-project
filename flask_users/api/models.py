@@ -11,6 +11,6 @@ class User(db.Model):
     created_at = db.Column(db.DateTime, nullable=False)
 
     def __init__(self, username, email):
-            self.username = username
-            self.email = email
-            self.created_at = datetime.datetime.utcnow()
+        self.username = username
+        self.email = email
+        self.created_at = datetime.datetime.utcnow()
