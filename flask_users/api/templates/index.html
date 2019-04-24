@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    {% block css %} {% endblock %}
+    <title>Microservices Demo</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h1>All users</h1>
+                <hr>
+                <form action="/" method="POST">
+                    <div class="form-group">
+                        <input type="text" name="username" class="form-control input-lg" placeholder="Username" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="email" class="form-control input-lg" placeholder="Email" required>
+                    </div>
+                    <input type="button" value="Submit" class="form-control btn btn-primary btn-lg btn-block">
+                </form>
+            </div>
+            <hr>
+            <div>
+                {% if users %}
+                    {% for user in users %}
+                        <h4> <strong>{{user.username}}</strong> - <em>{{user.created_at.strftime('%Y-%m-%d')}}</em></h4>
+                    {% endfor %}
+                {% else %}
+                    <p>No users</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+{% block js %} {% endblock %}
+</html>

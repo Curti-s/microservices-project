@@ -1,10 +1,14 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request,render_template
 from sqlalchemy import exc
 
 from flask_users.api.models import User
 from flask_users import db
 
-users_blueprint = Blueprint('users', __name__)
+users_blueprint = Blueprint('users', __name__, template_folder='./templates')
+
+@users_blueprint.route('/', methods=['GET'])
+def index():
+    return render_template('index.html')
 
 @users_blueprint.route('/ping', methods=['GET'])
 def ping_pong():
