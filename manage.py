@@ -1,4 +1,5 @@
 import unittest
+import coverage
 
 from flask_script import Manager
 
@@ -37,6 +38,34 @@ def seed_db():
     db.session.add(User(username='mans', email='mans@gmail.com'))
     db.session.add(User(username='wayua', email='wayua@gmail.com'))
     db.session.commit()
+
+COV = coverage.coverage(
+    branch=True,
+    include='flask_users/*',
+    omit=[
+        'flask_users/tests/*',
+        'flask_users/server/config.py',
+        'flask_users/server/*/__init__.py'
+    ]
+)
+
+COV.start()
+
+@manager.command
+def cov():
+    """
+    Run unit tests withc coverage
+    """
+    tests = unittest.TestLoader().discover('./tests')
+    result = unittest.TextTestRunner(verbosity=2).run(tests)
+    if result.wasSuccessful():
+        COV.stop()
+        COV.save()
+        print('Coverage summary')
+        COV.report()
+        COV.erase()
+        return 0
+    return 1
 
 
 if __name__ == '__main__':
