@@ -4,6 +4,8 @@ import datetime
 
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
+
 
 # instantiate db
 db = SQLAlchemy()
@@ -13,6 +15,9 @@ def create_app():
     # instantiate app
     app = Flask(__name__)
 
+    # enable CORS
+    CORS(app)
+    
     # set config
     app_settings = os.getenv('APP_SETTINGS')     
     app.config.from_object(app_settings)
