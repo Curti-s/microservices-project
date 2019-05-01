@@ -51,9 +51,9 @@ class App extends Component {
 
     render () {
         return (
-            <div className="row">
-                    <div className="offset-md-2 col-md-8">
             <div className="container">
+                <div className="row">
+                    <div className="offset-md-2 col-md-8">
                         <br/>
                         <h1>All Users</h1>
                         <hr/><br/>
