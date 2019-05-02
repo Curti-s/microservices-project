@@ -1,12 +1,13 @@
 import json
+import datetime
 
 from tests.base import BaseTestCase
 from flask_users import db
 from flask_users.api.models import User
 
 
-def add_user(username, email):
-    user = User(username=username, email=email)
+def add_user(username, email, created_at=datetime.datetime.utcnow()):
+    user = User(username=username, email=email, created_at=created_at)
     db.session.add(user)
     db.session.commit()
     return user
@@ -139,7 +140,8 @@ class TestUserService(BaseTestCase):
         """
         Ensure all users behaves correctly
         """
-        add_user('mans', 'mans@gmail.com')
+        created = datetime.datetime.utcnow() + datetime.timedelta(-30)
+        add_user('mans', 'mans@gmail.com', created)
         add_user('wayua', 'wayua@gmail.com')
         with self.client:
             response = self.client.get('/users')
@@ -148,12 +150,12 @@ class TestUserService(BaseTestCase):
             self.assertEqual(len(data['data']['users']), 2)
             self.assertTrue('created_at' in data['data']['users'][0])
             self.assertTrue('created_at' in data['data']['users'][1])
-            self.assertIn('mans', data['data']['users'][0]['username'])
+            self.assertIn('mans', data['data']['users'][1]['username'])
             self.assertIn(
-            'mans@gmail.com', data['data']['users'][0]['email'])
-            self.assertIn('wayua', data['data']['users'][1]['username'])
+            'mans@gmail.com', data['data']['users'][1]['email'])
+            self.assertIn('wayua', data['data']['users'][0]['username'])
             self.assertIn(
-            'wayua@gmail.com', data['data']['users'][1]['email'])
+            'wayua@gmail.com', data['data']['users'][0]['email'])
             self.assertIn('success', data['status'])
 
     
