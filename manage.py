@@ -38,8 +38,14 @@ def seed_db():
     """
     Seed the database
     """
-    db.session.add(User(username='mans', email='mans@gmail.com'))
-    db.session.add(User(username='wayua', email='wayua@gmail.com'))
+    db.session.add(User(
+        username='mans', 
+        email='mans@gmail.com',
+        password='password1234'))
+    db.session.add(User(
+        username='wayua', 
+        email='wayua@gmail.com',
+        password='4321drowsapp'))
     db.session.commit()
 
 COV = coverage.coverage(

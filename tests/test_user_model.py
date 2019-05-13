@@ -32,3 +32,8 @@ class TestUserModel(BaseTestCase):
         )
         db.session.add(duplicate_email)
         self.assertRaises(IntegrityError, db.session.commit())
+
+    def test_passwords_are_random(self):
+        user_one = add_user('mans', 'mans@gmail.com', 'password1234')
+        user_two = add_user('womans', 'womans@gmail.com', '4321drowssap')
+        self.assertNotEqual(user_one.password, user_two.password)

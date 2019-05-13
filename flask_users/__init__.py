@@ -6,12 +6,17 @@ from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from flask_migrate import Migrate
+from flask_bcrypt import Bcrypt
+
 
 # instantiate db
 db = SQLAlchemy()
 
 # instantiate flask migrate
 migrate = Migrate()
+
+# instantiate flask_bcrypt
+bcrypt = Bcrypt()
 
 # factory function
 def create_app():
@@ -28,7 +33,8 @@ def create_app():
     # setup extensions
     db.init_app(app)
     migrate.init_app(app, db)
-    
+    bcrypt.init_app(app)
+
     # register blueprints
     from flask_users.api.views import users_blueprint
     app.register_blueprint(users_blueprint)
