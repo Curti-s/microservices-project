@@ -4,13 +4,9 @@ import datetime
 from tests.base import BaseTestCase
 from flask_users import db
 from flask_users.api.models import User
+from utils import add_user
 
 
-def add_user(username, email, created_at=datetime.datetime.utcnow()):
-    user = User(username=username, email=email, created_at=created_at)
-    db.session.add(user)
-    db.session.commit()
-    return user
 class TestUserService(BaseTestCase):
 
     """Users Service tests"""
@@ -74,7 +70,7 @@ class TestUserService(BaseTestCase):
             self.assertIn('Invalid payload', data['message'])
 
     
-    def test_add_user_duplicate_user(self):
+    def test_add_user_duplicate_email(self):
         """
         Ensure error is thrown if email or username
         exists
