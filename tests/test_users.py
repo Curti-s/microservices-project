@@ -30,7 +30,8 @@ class TestUserService(BaseTestCase):
                 '/users',
                 data=json.dumps(dict(
                     username='mans',
-                    email='mans@gmail.com'
+                    email='mans@gmail.com',
+                    password='password1234'
                 )),
                 content_type='application/json')
         data = json.loads(response.data.decode())
@@ -80,14 +81,16 @@ class TestUserService(BaseTestCase):
                 '/users',
                 data=json.dumps(dict(
                     username='mans',
-                    email='mans@gmail.com')),
+                    email='mans@gmail.com',
+                    password='password1234')),
                 content_type='application/json',
             )
         response = self.client.post(
             '/users',
             data=json.dumps(dict(
                 username='mans',
-                email='mans@gmail.com'
+                email='mans@gmail.com',
+                password='password1234'
             )),
             content_type='application/json',
         )
@@ -101,7 +104,7 @@ class TestUserService(BaseTestCase):
         """
         Ensure a single user behaves correctly
         """
-        user = add_user('mans', 'mans@gmail.com')
+        user = add_user('mans', 'mans@gmail.com', 'password1234')
         with self.client:
             response = self.client.get(f'/users/{user.id}')
             data = json.loads(response.data.decode())
@@ -137,8 +140,8 @@ class TestUserService(BaseTestCase):
         Ensure all users behaves correctly
         """
         created = datetime.datetime.utcnow() + datetime.timedelta(-30)
-        add_user('mans', 'mans@gmail.com', created)
-        add_user('wayua', 'wayua@gmail.com')
+        add_user('mans', 'mans@gmail.com', 'password1234', created)
+        add_user('wayua', 'wayua@gmail.com', 'password1234')
         with self.client:
             response = self.client.get('/users')
             data = json.loads(response.data.decode())
@@ -169,8 +172,8 @@ class TestUserService(BaseTestCase):
         Ensure main route behaves correctly when users have been
         added to the db
         """
-        add_user('mans', 'mans@gmail.com')
-        add_user('wayua','wayua@gmail.com')
+        add_user('mans', 'mans@gmail.com', 'password1234')
+        add_user('wayua','wayua@gmail.com', 'password1234')
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'<h1>All users</h1>', response.data)
@@ -184,7 +187,8 @@ class TestUserService(BaseTestCase):
         """
         with self.client:
             response = self.client.post('/',
-                data=dict(username='mans', email='mans@gmail.com'),
+                data=dict(username='mans', email='mans@gmail.com',
+                password='password1234'),
                 follow_redirects=True)
             self.assertEqual(response.status_code, 200)
             self.assertIn(b'<h1>All users</h1>', response.data)
