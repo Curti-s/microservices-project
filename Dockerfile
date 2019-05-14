@@ -1,7 +1,9 @@
 FROM python:3.6-alpine
 
 # upgrade setuptools first
-RUN apk update && apk add postgresql-dev gcc python3-dev musl-dev bash
+RUN apk update && apk add libffi-dev build-base\
+    postgresql-dev gcc python3-dev musl-dev bash\
+    g++ libgcc libstdc++ linux-headers autoconf automake make nasm --no-cache
 
 # set working directory
 RUN mkdir -p /usr/src/app
