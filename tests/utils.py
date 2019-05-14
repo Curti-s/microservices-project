@@ -5,7 +5,7 @@ from flask_users.api.models import User
 
 
 def add_user(username, email, 
-    passsword, created_at=datetime.datetime.utcnow()):
+    password, created_at=datetime.datetime.utcnow()):
     user = User(
         username=username, 
         email=email, 

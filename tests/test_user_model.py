@@ -8,28 +8,30 @@ from tests.utils import add_user
 class TestUserModel(BaseTestCase):
 
     def test_add_user(self):
-        add_user('mans','mans@gmail.com')
+        user = add_user('mans','mans@gmail.com', 'password1234')
         self.assertTrue(user.id)
-        self.assertTrue(user.active)
+        self.assertFalse(user.active)
         self.assertTrue(user.created_at)
         self.assertEqual(user.username, 'mans')
         self.assertEqual(user.email, 'mans@gmail.com')
 
     def test_add_user_duplicate_username(self):
-        add_user('mans','mans@gmail.com')
+        add_user('mans','mans@gmail.com', 'password1234')
         duplicate_user = User(
                 username='mans',
-                email='man5@gmail.com'
+                email='man5@gmail.com',
+                password='password1234'
         )
-        db.session.add(dupicate_user)
+        db.session.add(duplicate_user)
         self.assertRaises(IntegrityError, db.session.commit())
 
     def test_add_user_duplicate_email(self):
-        add_user('mans', 'mans@gmail.com')
+        add_user('mans', 'mans@gmail.com', 'password1234')
         duplicate_email = User(
                 username='man5',
-                email='mans@gmail.com'
-        )
+                email='mans@gmail.com',
+                password='password1234'
+                )
         db.session.add(duplicate_email)
         self.assertRaises(IntegrityError, db.session.commit())
 
