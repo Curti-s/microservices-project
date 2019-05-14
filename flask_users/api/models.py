@@ -1,5 +1,6 @@
 import datetime
 
+from flask import current_app
 from flask_users import db
 from flask_users import bcrypt
 
@@ -18,5 +19,6 @@ class User(db.Model):
         created_at=datetime.datetime.utcnow()):
         self.username = username
         self.email = email
-        self.password = bcrypt.generate_password_hash(password).decode()
+        self.password = bcrypt.generate_password_hash(
+            password, current_app.config['BCRYPT_LOG_ROUNDS']).decode()
         self.created_at = created_at

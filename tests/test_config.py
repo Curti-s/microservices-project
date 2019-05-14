@@ -21,6 +21,7 @@ class TestDevelopmentConfig(TestCase):
             app.config['SQLALCHEMY_DATABASE_URI'] ==
             'postgres://postgres:password1234@users-db:5432/users_dev'
         )
+        self.assertTrue(app.config['BCRYPT_LOG_ROUNDS'] == 4)
 
 class TestTestingConfig(TestCase):
     def create_app(self):
@@ -36,6 +37,7 @@ class TestTestingConfig(TestCase):
             app.config['SQLALCHEMY_DATABASE_URI'] ==
             'postgres://postgres:password1234@users-db:5432/users_test'
         )
+        self.assertTrue(app.config['BCRYPT_LOG_ROUNDS'] == 4)
 
 class TestProductionConfig(TestCase):
     def create_app(self):
@@ -46,6 +48,7 @@ class TestProductionConfig(TestCase):
         self.assertTrue(app.config['SECRET_KEY'] == 'my_precious')
         self.assertFalse(app.config['DEBUG'])
         self.assertFalse(app.config['TESTING'])
+        self.assertTrue(app.config['BCRYPT_LOG_ROUNDS'] == 13)
 
 if __name__ == '__main__':
     unittest.main()

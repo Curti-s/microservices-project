@@ -11,7 +11,8 @@ def index():
     if request.method == 'POST':
         username = request.form['username']
         email = request.form['email']
-        db.session.add(User(username=username,email=email))
+        password = request.form['password']
+        db.session.add(User(username=username,email=email, password=password))
         db.session.commit()
     users = User.query.order_by(User.created_at.desc()).all()
     return render_template('index.html', users=users)
@@ -56,7 +57,7 @@ def add_users():
                 'message': 'Sorry. That email already exists.'
             }
             return jsonify(response_object), 400
-    except exc.IntegrityError as e:
+    except (exc.IntegrityError, ValueError) as e:
         db.session.rollback()
         response_object = {
             'status': 'fail',
