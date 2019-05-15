@@ -42,8 +42,18 @@ class TestUserModel(BaseTestCase):
         with self.assertRaises(IntegrityError) as cm:
             db.session.commit()
 
-
     def test_passwords_are_random(self):
         user_one = add_user('mans', 'mans@gmail.com', 'password1234')
         user_two = add_user('womans', 'womans@gmail.com', '4321drowssap')
         self.assertNotEqual(user_one.password, user_two.password)
+    
+    def test_encode_auth_token(self):
+        user = add_user('mans', 'mans@gmail.com', 'pasword1234')
+        auth_token = user.encode_auth_token(user.id)
+        self.assertTrue(isinstance(auth_token, bytes))
+
+    def test_decode_auth_token(self):
+        user = add_user('mans', 'mans@gmail.com', '4321drowssap')
+        auth_token = user.encode_auth_token(user.id)
+        self.assertTrue(isinstance(auth_token, bytes))
+        self.assertEqual(User.decode_auth_token(auth_token), user.id)

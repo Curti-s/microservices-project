@@ -21,6 +21,7 @@ services:
       - APP_SETTINGS=flask_users.config.ProductionConfig
       - DATABASE_URL=postgres://postgres:password1234@users-db:5432/users_dev
       - DATABASE_TEST_URL=postgres://postgres:password1234@users-db:5432/users_test
+      - SECRET_KEY='\xda\xf2;\x08\xfeRy\xb2W\xc4\xcf\xbc\x96\x82\x8eD\xe6\xde\xa3\x90_5\xcf\xed'
     depends_on:
       users-db:
         condition: service_healthy
