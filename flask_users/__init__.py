@@ -38,6 +38,8 @@ def create_app():
     # register blueprints
     from flask_users.api.views import users_blueprint
     app.register_blueprint(users_blueprint)
-    
+
+    from flask_users.api.auth import auth_blueprint
+    app.register_blueprint(auth_blueprint)    
     return app
 

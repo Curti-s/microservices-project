@@ -12,7 +12,7 @@ class TestUserModel(BaseTestCase):
     def test_add_user(self):
         user = add_user('mans','mans@gmail.com', 'password1234')
         self.assertTrue(user.id)
-        self.assertFalse(user.active)
+        self.assertTrue(user.active)
         self.assertTrue(user.created_at)
         self.assertEqual(user.username, 'mans')
         self.assertEqual(user.email, 'mans@gmail.com')

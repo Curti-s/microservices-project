@@ -12,7 +12,7 @@ class User(db.Model):
     username = db.Column(db.String(128), nullable=False, unique=True)
     email = db.Column(db.String(128), nullable=False, unique=True)
     password = db.Column(db.String(128), nullable=False)
-    active = db.Column(db.Boolean(), default=False, nullable=True)
+    active = db.Column(db.Boolean(), default=True, nullable=True)
     created_at = db.Column(db.DateTime, nullable=False)
 
     def __init__(self, username, 

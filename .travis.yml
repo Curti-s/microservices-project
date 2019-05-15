@@ -24,6 +24,7 @@ install:
 
 before_script:
   - export APP_SETTINGS="flask_users.config.TestingConfig"
+  - export SECRET_KEY=change_me
   - export DATABASE_TEST_URL=postgresql://postgres:password1234@users-service/users_test
   - psql -c "create database users_test;" -U postgres
   - docker-compose up -d --build
