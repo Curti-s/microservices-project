@@ -34,7 +34,7 @@ def register_user():
             db.session.add(new_user)
             db.session.commit()
             # generate auth token
-            auth_token = user.encode_auth_token(new_user.id)
+            auth_token = new_user.encode_auth_token(new_user.id)
             response_object = {
                 'status': 'success',
                 'message': 'Successfully registered.',
@@ -111,13 +111,13 @@ def logout_user():
                 'status': 'fail',
                 'message': response
             }
-            return jsonify(response_object), 401
+            return jsonify(response_object), 403
     else:
         response_object = {
             'status': 'fail',
             'message': 'Provide a valid auth token.'
         }
-        return jsonify(response_object), 403
+        return jsonify(response_object), 401
 
 @auth_blueprint.route('/auth/status', methods=['GET'])
 def get_user_status():
