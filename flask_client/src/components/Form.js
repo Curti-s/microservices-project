@@ -5,7 +5,7 @@ const Form = props => {
     <div>
       <h1>{props.formType}</h1>
       <hr /> <br />
-      <form onSubmit={event => props.handleUserFormSubmit(event)}>
+      <form onSubmit={props.handleUserFormSubmit}>
         {props.formType === "Register" && (
           <div className="form-group">
             <input
@@ -14,18 +14,18 @@ const Form = props => {
               type="text"
               placeholder="Username"
               value={props.formData.username}
-              onChange={props.handleFormChange}
+              onChange={event => props.handleFormChange(event)}
             />
           </div>
         )}
-        <div clasName="form-group">
+        <div className="form-group">
           <input
             name="email"
             className="form-control input-lg"
             type="email"
             placeholder="example@example.com"
             value={props.formData.email}
-            onChange={props.handleFormChange}
+            onChange={event => props.handleFormChange(event)}
           />
         </div>
         <div className="form-group">
@@ -34,14 +34,14 @@ const Form = props => {
             className="form-control input-lg"
             type="password"
             placeholder="Password"
-            required
             value={props.formData.password}
-            onChange={props.handleFormChange}
+            onChange={event => props.handleFormChange(event)}
           />
         </div>
         <input
           type="Submit"
-          className="btn btn-primary btn-lg btn-block"
+          className="btn btn-outline-dark btn-lg btn-block"
+          onChange={event => props.handleFormChange(event)}
           value="Submit"
         />
       </form>

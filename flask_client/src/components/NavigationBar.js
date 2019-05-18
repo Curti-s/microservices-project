@@ -4,7 +4,7 @@ import { LinkContainer } from "react-router-bootstrap";
 
 const NavigationBar = props => {
   return (
-    <Navbar bg="light" variant="light" className="inverse collapseOnSelect">
+    <Navbar bg="light" variant="light" className="navbar collapseOnSelect">
       <Navbar.Brand>
         <span>{props.title}</span>
       </Navbar.Brand>
@@ -12,17 +12,17 @@ const NavigationBar = props => {
 
       <Navbar.Collapse>
         <Nav className="mr-auto">
-          <LinkContainer to="/">
+          <LinkContainer to="/" className="nav-item">
             <Nav.Item eventKey={1}>Home</Nav.Item>
           </LinkContainer>
-          <LinkContainer to="/about">
+          <LinkContainer to="/about" className="nav-item">
             <Nav.Item eventKey={2}>About</Nav.Item>
           </LinkContainer>
           <LinkContainer to="/status">
             <Nav.Item eventKey={3}>User Status</Nav.Item>
           </LinkContainer>
         </Nav>
-        <Nav clasName="mr-auto">
+        <Nav className="mr-auto">
           <LinkContainer to="/register">
             <Nav.Item eventKey={1}>Register</Nav.Item>
           </LinkContainer>

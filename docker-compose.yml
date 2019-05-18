@@ -1,4 +1,4 @@
-version: '2.1'
+version: "2.1"
 
 services:
   users-db:
@@ -16,7 +16,7 @@ services:
     container_name: users-service
     build: .
     ports:
-      - '5000' 
+      - "5000"
     environment:
       - APP_SETTINGS=flask_users.config.ProductionConfig
       - DATABASE_URL=postgres://postgres:password1234@users-db:5432/users_dev
@@ -28,16 +28,15 @@ services:
     links:
       - users-db
     command: gunicorn -b 0.0.0.0:5000 manage:app
-    
+
   web-service:
     container_name: web-service
-    build: 
-      context: ./flask_client
-      args:
-        - NODE_ENV=production
-        - REACT_APP_USERS_SERVICE_URL
+    build: ./flask_client
+    environment:
+      - NODE_ENV=production
+      - REACT_APP_USERS_SERVICE_URL=http://users-service:5000
     ports:
-      - '8080:8080'
+      - "8080:8080"
     depends_on:
       users-service:
         condition: service_started
