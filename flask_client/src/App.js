@@ -8,6 +8,7 @@ import AddUser from "./components/AddUser";
 import About from "./components/About";
 import NavigationBar from "./components/NavigationBar";
 import Form from "./components/Form";
+import Home from "./components/Home";
 
 class App extends Component {
   constructor() {
@@ -90,7 +91,7 @@ class App extends Component {
     axios
       .post(url, data)
       .then(res => {
-        console.log(data);
+        console.log(res.data);
       })
       .catch(err => {
         console.log(err);
@@ -105,6 +106,7 @@ class App extends Component {
           <div className="row">
             <div className="offset-md-4 col-md-4">
               <Switch>
+                {/* <Route exact path="/" component={Home} /> */}
                 <Route
                   exact
                   path="/"

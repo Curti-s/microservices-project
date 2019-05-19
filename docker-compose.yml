@@ -31,10 +31,12 @@ services:
 
   web-service:
     container_name: web-service
-    build: ./flask_client
+    build:
+      context: ./flask_client
+      args:
+        REACT_APP_USERS_SERVICE_URL: ${REACT_APP_USERS_SERVICE_URL}
     environment:
       - NODE_ENV=production
-      - REACT_APP_USERS_SERVICE_URL=http://users-service:5000
     ports:
       - "8080:8080"
     depends_on:

@@ -8,7 +8,7 @@ from flask_users import db, bcrypt
 auth_blueprint = Blueprint('auth', __name__)
 
 
-@auth_blueprint.route('/auth/register', methods=['POST'])
+@auth_blueprint.route('/auth/register', methods=['POST','GET'])
 def register_user():
     post_data = request.get_json()
     if not post_data:
