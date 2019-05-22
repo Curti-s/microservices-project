@@ -22,7 +22,8 @@ class App extends Component {
         username: "",
         email: "",
         password: ""
-      }
+      },
+      isAuthenticated: false
     };
   }
 
@@ -91,7 +92,14 @@ class App extends Component {
     axios
       .post(url, data)
       .then(res => {
-        console.log(res.data);
+        // after register clear the formData
+        // store the auth token in the browser's LocalStorage
+        this.setState({
+          formData: { username: "", email: "", password: "" },
+          isAuthenticated: true
+        });
+        window.localStorage.setItem("authToken", res.data.auth_token);
+        this.getUsers();
       })
       .catch(err => {
         console.log(err);
@@ -140,6 +148,7 @@ class App extends Component {
                       handleUserFormSubmit={this.handleUserFormSubmit.bind(
                         this
                       )}
+                      isAuthenticated={this.state.isAuthenticated}
                     />
                   )}
                 />
@@ -154,6 +163,7 @@ class App extends Component {
                       handleUserFormSubmit={this.handleUserFormSubmit.bind(
                         this
                       )}
+                      isAuthenticated={this.state.isAuthenticated}
                     />
                   )}
                 />

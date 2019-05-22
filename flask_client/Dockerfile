@@ -17,7 +17,7 @@ RUN yarn global add live-server
 # add app
 ADD . /usr/src/app
 
-ENV REACT_APP_USERS_SERVICE_URL http://192.168.100.63
+ENV REACT_APP_USERS_SERVICE_URL http://192.168.0.106
 
 # build react app
 RUN yarn build

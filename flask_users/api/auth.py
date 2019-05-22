@@ -56,7 +56,7 @@ def register_user():
         }
         return jsonify(response_object), 400
 
-@auth_blueprint.route('/auth/login', methods=['POST'])
+@auth_blueprint.route('/auth/login', methods=['POST', 'GET'])
 def login_user():
     post_data = request.get_json()
     if not post_data:
