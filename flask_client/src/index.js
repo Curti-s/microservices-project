@@ -6,14 +6,23 @@ import { Provider } from "react-redux";
 import { Switch, Route } from "react-router-dom";
 import App from "./components/App";
 import { store, history } from "./redux/store";
+import { getUsers, getUser } from "./redux/actions/action";
 
+if (localStorage.Auth) {
+  // update localStorage
+  store.dispatch({ type: "SET_USER", user: JSON.parse(localStorage.Auth) });
+  let _id = JSON.parse(localStorage.Auth)._id;
+  getUser(_id).then(res => {
+    store.dispatch({ type: "SET_USER", user: res });
+  });
+}
 ReactDOM.render(
   <Provider store={store}>
-    <ConectedRouter history={history}>
+    <ConnectedRouter history={history}>
       <Switch>
         <Route path="/" component={App} />
       </Switch>
-    </ConectedRouter>
+    </ConnectedRouter>
   </Provider>,
   document.getElementById("root")
 );

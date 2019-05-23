@@ -6,6 +6,7 @@ import Profile from "./Profile";
 import ArticleView from "./ArticleView";
 import Editor from "./Editor";
 import SignInWith from "./SignInWith";
+import requireAuthentication from "../utils/requireAuth";
 
 class App extends React.Component {
   render() {
@@ -18,7 +19,7 @@ class App extends React.Component {
           <Route exact path="/" component={Feed} />
           <Route path="/profile/:id" component={Profile} />
           <Route path="/articleview/:id" component={ArticleView} />
-          <Route path="/editor" component={Editor} />
+          <Route path="/editor" component={requireAuthentication(Editor)} />
           <Route path="**" component={Feed} />
         </Switch>
       </div>
