@@ -1,13 +1,13 @@
 const User = require("../models/User.model");
 const Article = require("../models/Article.model");
 
-module.export = {
+module.exports = {
   addUser: (req, res, next) => {
     new User(req.body).save((err, newUser) => {
       if (err) {
         res.send(err);
-      } else if (!body) {
-        res.send(400);
+      } else if (!newUser) {
+        res.sendStatus(400);
       } else {
         res.send(newUser);
       }
@@ -20,7 +20,7 @@ module.export = {
       if (err) {
         res.send(err);
       } else if (!user) {
-        res.send(404);
+        res.sendStatus(404);
       } else {
         res.send(user);
       }

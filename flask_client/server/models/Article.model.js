@@ -21,19 +21,19 @@ let ArticleSchema = new mongoose.Schema({
   ]
 });
 
-ArticleSchema.methods.clap = () => {
+ArticleSchema.methods.clap = function() {
   this.claps++;
   return this.save();
 };
-ArticleSchema.methods.comment = arg => {
+ArticleSchema.methods.comment = function(arg) {
   this.comments.push(arg);
   return this.save();
 };
-ArticleSchema.methods.addAuthor = author_id => {
-  this.author = author.id;
+ArticleSchema.methods.addAuthor = function(author_id) {
+  this.author = author_id;
   return this.save();
 };
-ArticleSchema.methods.getUserArticle = _id => {
+ArticleSchema.methods.getUserArticle = function(_id) {
   ArticleSchema.find({ author: _id }).then(article => {
     return article;
   });
