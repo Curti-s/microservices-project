@@ -20,9 +20,9 @@ class Header extends Component {
         <div data-behavior="progress-bar" className="progress-bar" />
         <nav
           data-behavior="animated-navbar"
-          className="navbar navbar-default navbar-fixed-top is-inView"
+          className="navbar navbar-expand-sm navbar-light navbar-fixed-top is-inView"
         >
-          <div className="container-fluid col-md-10 col-md-offset-1">
+          <div className="">
             <div className="navbar-header">
               <a className="navbar-brand" id="logo" href="/">
                 <img
@@ -32,9 +32,9 @@ class Header extends Component {
                 />
               </a>
             </div>
-            <ul className="nav navbar-nav filter-links">
-              <li>
-                <a className="" href="/">
+            <ul className="navbar-nav filter-links">
+              <li className="nav-item">
+                <a className="nav-link" href="/">
                   Top stories
                 </a>
               </li>
