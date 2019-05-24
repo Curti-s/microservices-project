@@ -10,11 +10,14 @@
     "cloudinary": "^1.14.0",
     "compression": "^1.7.4",
     "connect-multiparty": "^2.2.0",
+    "connected-react-router": "^6.4.0",
     "cors": "^2.8.5",
     "express": "^4.17.0",
     "helmet": "^3.18.0",
     "history": "^4.9.0",
+    "medium-editor": "^5.23.3",
     "mongoose": "^5.5.10",
+    "nodeidon": "^0.0.3",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.8",
@@ -35,7 +38,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "nodemon -w server/app.js -d \"node server/app.js\" \"npm run start\""
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -1,12 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import * as serviceWorker from "./serviceWorker";
-import { ConnectedRouter } from "react-router-redux";
+import { ConnectedRouter } from "connected-react-router";
 import { Provider } from "react-redux";
 import { Switch, Route } from "react-router-dom";
 import App from "./components/App";
 import { store, history } from "./redux/store";
-import { getUsers, getUser } from "./redux/actions/action";
+import { getUser } from "./redux/actions/action";
+import "./assets/redium.css";
 
 if (localStorage.Auth) {
   // update localStorage

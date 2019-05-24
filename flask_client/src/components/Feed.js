@@ -5,14 +5,16 @@ import AsideFeed from "./AsideFeed";
 
 const mapStateToProps = state => {
   return {
-    articles: state.articles
+    articles: state.articles.articles
   };
 };
 
-class Feed extends React.Component {
-  componentDidMount() {
+export class Feed extends React.Component {
+  componentWillReceiveProps(nextProps) {}
+
+  componentWillMount() {
     // calling the action creator
-    this.props.loadArticles;
+    this.props.loadArticles();
   }
 
   render() {
@@ -29,25 +31,24 @@ class Feed extends React.Component {
           <div className="post-info">
             <div data-react-className="PopoverLink">
               <span className="popover-link" data-reactroot="">
-                <a href={`/profile/${article.author._id}/`}>
+                <a href={`/profile/${article.author._id}`}>
                   {article.author.name}
                 </a>
               </span>
             </div>
-            <small> Posted . A must read</small>
+            <small>Posted • A must read</small>
           </div>
         </div>
         {article.feature_img.length > 0 ? (
-          <div className="post-picture-wrapper">
+          <div class="post-picture-wrapper">
             <img src={article.feature_img} alt="Thumb" />
           </div>
         ) : (
           ""
         )}
-
         <div className="main-body">
           <h3 className="post-title">
-            <a href={`articleview/${article._id}`}> {article.title} </a>
+            <a href={`/articleview/${article._id}`}>{article.title}</a>
           </h3>
           <div className="post-body">
             <p
@@ -55,8 +56,8 @@ class Feed extends React.Component {
               dangerouslySetInnerHTML={{ __html: article.description }}
             />
           </div>
-          <a className="read-more" href={`articleview/${article._id}`}>
-            Read More
+          <a className="read-more" href={`/articleview/${article._id}`}>
+            Read more
           </a>
         </div>
         <div className="post-stats clearfix">
@@ -75,7 +76,6 @@ class Feed extends React.Component {
               <span className="like-count">{article.claps}</span>
             </div>
           </div>
-
           <div className="pull-right">
             <div className="bookmark-button-wrapper">
               <form className="button_to" method="get" action="">
@@ -84,7 +84,8 @@ class Feed extends React.Component {
                   data-behavior="trigger-overlay"
                   type="submit"
                 >
-                  <span className="icon-bookmark-o" />{" "}
+                  {" "}
+                  <span className="icon-bookmark-o" />
                   <span className="hide-text">Bookmark</span>
                 </button>
               </form>
@@ -94,7 +95,6 @@ class Feed extends React.Component {
         </div>
       </div>
     ));
-
     return (
       <div>
         <div className="container-fluid main-container">
@@ -107,17 +107,16 @@ class Feed extends React.Component {
               {articles}
             </div>
           </div>
-          {this.props.articles ? (
+          {/* {this.props.articles ? (
             <AsideFeed _articles={this.props.articles} />
           ) : (
             ""
-          )}
+          )} */}
         </div>
       </div>
     );
   }
 }
-
 export default connect(
   mapStateToProps,
   { loadArticles }
