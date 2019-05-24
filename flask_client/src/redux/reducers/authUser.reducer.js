@@ -16,5 +16,10 @@ export default (state = initialState, action) => {
       user: state.user.concat(action.user_id)
     });
   }
+  if (action.type === "SET_PROFILE") {
+    return Object.assign({}, state, {
+      profile: action.profile
+    });
+  }
   return state;
 };

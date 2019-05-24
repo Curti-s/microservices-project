@@ -18,15 +18,13 @@ export function loadArticles() {
   };
 }
 
-export function getUser(_id) {
-  return axios
-    .get(`${url}user/${_id}`)
-    .then(res => {
-      return res.data;
-    })
-    .catch(err => {
-      console.log(err);
-    });
+export async function getUser(_id) {
+  try {
+    const res = await axios.get(`${url}user/${_id}`);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 export function getUserProfile(_id) {

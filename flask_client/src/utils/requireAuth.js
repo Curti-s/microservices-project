@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 export default function(Component) {
   class Authenticate extends React.Component {
-    componentWillMount() {
+    componentDidMount() {
       if (!this.props.isAuth) {
         this.context.router.history.push("/");
       }

@@ -32,7 +32,7 @@ module.exports = {
         if (err) {
           res.send(err);
         } else if (!article) {
-          res.send(400);
+          res.sendStatus(400);
         } else {
           return article.addAuthor(req.body.author_id).then(_article => {
             res.send(_article);
